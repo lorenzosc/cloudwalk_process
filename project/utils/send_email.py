@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from ..email_config import EMAIL, PASSWORD, SERVER, PORT
+from .email_config import EMAIL, PASSWORD, SERVER, PORT
 
 def send_email(subject, body, to_email):
     # Email configuration

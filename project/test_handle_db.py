@@ -1,4 +1,4 @@
-from connect import connect
+from utils.connect import connect
 from datetime import datetime
 from handle_db import add_client, alter_client, delete_client
 
@@ -14,7 +14,7 @@ if __name__ == "__main__":
     
     alter_client(90000, cursor, changes)
     delete_client(90001, cursor)
-    add_client(cursor, client)
+    # add_client(cursor, client)
 
     conn.commit()
     cursor.close()

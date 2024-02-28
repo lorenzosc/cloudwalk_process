@@ -1,7 +1,7 @@
-from ..connect import connect
+from ..utils.connect import connect
 from utils.send_email import send_email
 import datetime
-from ..email_config import EMAIL
+from ..utils.email_config import EMAIL
 
 """
 Generate summary with week information
