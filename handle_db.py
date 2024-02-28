@@ -1,7 +1,4 @@
 import psycopg2
-from connect import connect
-from config import load_config
-from datetime import datetime
 
 def add_client(db_cursor: psycopg2.extensions.cursor, client: list):
     query = f"""

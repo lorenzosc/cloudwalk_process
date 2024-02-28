@@ -1,12 +1,13 @@
 import psycopg2
 from config import load_config
 
-def connect(config):
+def connect() -> psycopg2.extensions.connection:
     """Connect to the PostgreSQL database server
 
     :param config: database configuration
-    :return: connection to database
+    :return: connection to da
     """
+    config = load_config()
     try:
         # connecting to the PostgreSQL server
         with psycopg2.connect(**config) as conn:
@@ -17,5 +18,4 @@ def connect(config):
 
 
 if __name__ == '__main__':
-    config = load_config()
-    connect(config)
+    connect()
