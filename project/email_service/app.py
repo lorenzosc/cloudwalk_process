@@ -52,8 +52,8 @@ def home():
     return "Email service is running"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
 
 while True:
     schedule.run_pending()
-    time.sleep(180)
+    time.sleep(1)

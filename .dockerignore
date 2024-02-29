@@ -1,0 +1,5 @@
+*.sql
+images/
+env/
+.gitignore
+__pycache__
