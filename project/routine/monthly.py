@@ -13,7 +13,7 @@ if __name__ == "__main__":
     backup_file = sys.argv[1]
 
     pg_restore_cmd = [
-        'pg_dump',
+        'pg_restore',
         '-h', config["host"],
         '-p', '5432',
         '-U', config["user"],
@@ -33,22 +33,24 @@ if __name__ == "__main__":
         conn_db = connect(config["database"]+"_backup")
         cur_db = conn_db.cursor()
         print("Proceding to vacuum backup database")
-        cur_db.execute("VACUUM")
+        conn_db.autocommit = True
+        cur_db.execute("VACUUM FULL")
         print("Vacuum done sucessfully")
 
-    except e:
+    except Exception as e:
         print(e)
         print("There was a problem in backup file database connection, the backup file could be corrupted")
 
     finally:
-        cur_db.execute("DROP DATABASE %s", [config["database"]+"_backup"])
+        cur_db.execute(f"DROP TABLE loans; DROP TABLE clients;")
         conn_db.commit()
         cur_db.close()
         conn_db.close()
 
 
     # Index maintenance
-    cur.execute("REINDEX DATABASE current_database")
+    conn.autocommit = True
+    cur.execute(f"REINDEX DATABASE {config['database']}")
     cur.execute("VACUUM ANALYZE")
     cur.execute("CLUSTER")
     
