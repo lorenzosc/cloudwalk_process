@@ -1,13 +1,15 @@
 import psycopg2
 from .config import load_config
 
-def connect() -> psycopg2.extensions.connection:
+def connect(db_name = None) -> psycopg2.extensions.connection:
     """Connect to the PostgreSQL database server
 
     :param config: database configuration
     :return: connection to da
     """
     config = load_config()
+    if db_name is not None:
+        config['database'] = db_name
     try:
         # connecting to the PostgreSQL server
         with psycopg2.connect(**config) as conn:
